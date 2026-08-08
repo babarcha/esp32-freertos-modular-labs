@@ -18,7 +18,7 @@ ESP-IDF workflow without rewriting the reusable components.
 | 3 | `05_mutex_protection` | Race conditions, mutexes | Safe resource wrapper |
 | 4 | `06_button_interrupt` | ISR-to-task handoff, debounce | `button_input` |
 | 4 | `07_software_timers` | FreeRTOS timers | LED timing controller |
-| 5–6 | Later labs | Peripherals and reliable architecture | Sensor-node foundation |
+| 5–6 | `08_uart_console` | UART input, command parsing, bounds checking | Console foundation |
 
 ## Repository layout
 
@@ -35,7 +35,18 @@ docs/                    Shared hardware and learning notes
 - One LED, one 220–330 ohm resistor, breadboard and jumper wires
 - VS Code with the PlatformIO extension, or PlatformIO Core
 
-## Build the first project
+## Part 1 status
+
+All eight Part 1 labs are implemented. They are intentionally published before
+the first board session so they can be compiled, flashed and hardware-tested in
+one ordered pass. Until that pass is complete, treat the source as
+**implementation complete, hardware validation pending**.
+
+Use the [Part 1 Windows validation plan](docs/part1_windows_validation.md) to
+record results. Each project also contains its own expected behaviour and
+review questions.
+
+## Build a project
 
 Open `projects/01_led_blink` as the PlatformIO project, or run:
 
@@ -46,8 +57,8 @@ pio run --target upload
 pio device monitor
 ```
 
-See the [first project's README](projects/01_led_blink/README.md) for wiring,
-configuration, expected output and exercises.
+Replace `01_led_blink` with the lab being tested. See its README for expected
+output and exercises.
 
 ## Design rules
 
@@ -56,10 +67,8 @@ configuration, expected output and exercises.
 - ISR code stays short and defers work to tasks.
 - Tasks block while idle rather than busy-waiting.
 - Public component APIs do not expose unnecessary implementation details.
-- Every completed phase includes build instructions, expected behaviour and a
-  stable Git tag.
+- Every completed phase includes build instructions and expected behaviour.
 
 ## License
 
 MIT
-
